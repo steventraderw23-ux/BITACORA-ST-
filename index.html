@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ST TRADING SYSTEMS — Reporte Institucional Completo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; font-family: system-ui, -apple-system, sans-serif; }
+        .card { background-color: #161b22; border: 1px solid #30363d; border-radius: 0.75rem; }
+        .accent-green { color: #3fb950; }
+        .accent-red { color: #f85149; }
+        .accent-gray { color: #8b949e; }
+        .badge-win { background-color: rgba(63, 185, 80, 0.15); color: #3fb950; border: 1px solid rgba(63, 185, 80, 0.3); }
+        .badge-loss { background-color: rgba(248, 81, 73, 0.15); color: #f85149; border: 1px solid rgba(248, 81, 73, 0.3); }
+        .badge-be { background-color: rgba(139, 148, 158, 0.15); color: #8b949e; border: 1px solid rgba(139, 148, 158, 0.3); }
+    </style>
+</head>
+<body class="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
+
+    <!-- Header / Branding -->
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-center pb-4 border-b border-gray-800">
+        <div>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-wider flex items-center gap-2">
+                ⚡ ST TRADING SYSTEMS
+            </h1>
+            <p class="text-sm text-gray-400 mt-1">Análisis de Performance Institucional | NASDAQ & ORO (XAUUSD)</p>
+        </div>
+        <div class="mt-4 md:mt-0 flex items-center gap-3">
+            <span class="px-3 py-1 bg-green-950 border border-green-600 text-green-400 text-xs font-bold rounded-full flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> ESTADO: RENTABLE
+            </span>
+            <span class="text-xs text-gray-400 border border-gray-700 px-3 py-1 rounded-full">28 Ago - 14 Sep 2026</span>
+        </div>
+    </header>
+
+    <!-- 1. Métricas Clave (KPI Cards) -->
+    <section>
+        <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">1. Métricas Clave de Performance</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="card p-4 text-center">
+                <p class="text-xs text-gray-400 uppercase font-semibold">Total Pips Netos</p>
+                <p class="text-2xl md:text-3xl font-bold accent-green mt-1">+1,585</p>
+            </div>
+            <div class="card p-4 text-center">
+                <p class="text-xs text-gray-400 uppercase font-semibold">Win Rate (Efectividad)</p>
+                <p class="text-2xl md:text-3xl font-bold text-white mt-1">51.7%</p>
+            </div>
+            <div class="card p-4 text-center">
+                <p class="text-xs text-gray-400 uppercase font-semibold">Profit Factor</p>
+                <p class="text-2xl md:text-3xl font-bold text-white mt-1">1.61</p>
+            </div>
+            <div class="card p-4 text-center">
+                <p class="text-xs text-gray-400 uppercase font-semibold">Trades Ejecutados</p>
+                <p class="text-2xl md:text-3xl font-bold text-white mt-1">58</p>
+            </div>
+            <div class="card p-4 text-center">
+                <p class="text-xs text-gray-400 uppercase font-semibold">Promedio Ganadora</p>
+                <p class="text-xl md:text-2xl font-bold accent-green mt-1">+140.0 pips</p>
+            </div>
+            <div class="card p-4 text-center">
+                <p class="text-xs text-gray-400 uppercase font-semibold">Promedio Perdedora</p>
+                <p class="text-xl md:text-2xl font-bold accent-red mt-1">-124.5 pips</p>
+            </div>
+            <div class="card p-4 text-center">
+                <p class="text-xs text-gray-400 uppercase font-semibold">Ratio R/R Medio</p>
+                <p class="text-xl md:text-2xl font-bold text-white mt-1">1 : 1.12</p>
+            </div>
+            <div class="card p-4 text-center">
+                <p class="text-xs text-gray-400 uppercase font-semibold">Días Ganadores</p>
+                <p class="text-xl md:text-2xl font-bold accent-green mt-1">83.3% (10/12)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Desglose por Activo y Dirección -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card p-5">
+            <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2">🎯 Desglose por Activo</h2>
+            <div class="space-y-3 text-sm">
+                <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                    <span class="font-medium text-gray-200">NASDAQ (9 trades)</span>
+                    <span class="accent-green font-bold">+580 pips <span class="text-xs text-gray-400">(66.7% WR)</span></span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="font-medium text-gray-200">ORO / XAUUSD (49 trades)</span>
+                    <span class="accent-green font-bold">+1,005 pips <span class="text-xs text-gray-400">(49.0% WR)</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="card p-5">
+            <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2">🧭 Desglose por Dirección</h2>
+            <div class="space-y-3 text-sm">
+                <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                    <span class="font-medium text-gray-200">COMPRAS (28 trades)</span>
+                    <span class="accent-green font-bold">+500 pips <span class="text-xs text-gray-400">(42.9% WR)</span></span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="font-medium text-gray-200">VENTAS (30 trades)</span>
+                    <span class="accent-green font-bold">+1,085 pips <span class="text-xs text-gray-400">(60.0% WR)</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gráfico / Histograma de Rendimiento por Sesión -->
+    <section class="card p-5">
+        <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+            📊 Histograma de Rendimiento por Sesión (Pips)
+        </h2>
+        <div class="relative w-full h-72 md:h-80">
+            <canvas id="sessionChart"></canvas>
+        </div>
+    </section>
+
+    <!-- 4. Resumen por Sesión Diario -->
+    <section class="card p-5">
+        <h2 class="text-base font-bold text-white mb-4">📅 Resumen por Sesión</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+                <thead>
+                    <tr class="text-gray-400 border-b border-gray-800 text-xs uppercase tracking-wider">
+                        <th class="pb-3">Fecha</th>
+                        <th class="pb-3">Día</th>
+                        <th class="pb-3">Pips del Día</th>
+                        <th class="pb-3">Resultado</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800 text-gray-300">
+                    <tr><td class="py-2.5">2026-08-28</td><td>Viernes</td><td class="accent-green font-semibold">+380</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                    <tr><td class="py-2.5">2026-08-31</td><td>Lunes</td><td class="accent-green font-semibold">+20</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-01</td><td>Martes</td><td class="accent-green font-semibold">+410</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-02</td><td>Miércoles</td><td class="accent-green font-semibold">+80</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-03</td><td>Jueves</td><td class="accent-green font-semibold">+140</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-04</td><td>Viernes</td><td class="accent-red font-semibold">-130</td><td><span class="px-2 py-0.5 text-xs rounded badge-loss">Negativo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-07</td><td>Lunes</td><td class="accent-green font-semibold">+300</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-08</td><td>Martes</td><td class="accent-green font-semibold">+100</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-09</td><td>Miércoles</td><td class="accent-green font-semibold">+220</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-10</td><td>Jueves</td><td class="accent-green font-semibold">+330</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-11</td><td>Viernes</td><td class="accent-red font-semibold">-390</td><td><span class="px-2 py-0.5 text-xs rounded badge-loss">Negativo</span></td></tr>
+                    <tr><td class="py-2.5">2026-09-14</td><td>Lunes</td><td class="accent-green font-semibold">+125</td><td><span class="px-2 py-0.5 text-xs rounded badge-win">Positivo</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 5. Métricas Adicionales -->
+    <section class="card p-5">
+        <h2 class="text-base font-bold text-white mb-4">📌 Métricas Adicionales</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Mejor Operación</span>
+                <span class="accent-green font-bold text-base">+300 pips (01-sep)</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Peor Operación</span>
+                <span class="accent-red font-bold text-base">-210 pips (11-sep)</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Expectativa por Operación</span>
+                <span class="text-white font-bold text-base">+27.3 pips</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Mejor Día</span>
+                <span class="accent-green font-bold text-base">01-sep-2026 (+410 pips)</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Peor Día</span>
+                <span class="accent-red font-bold text-base">11-sep-2026 (-390 pips)</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Racha Máx. Días Ganadores</span>
+                <span class="accent-green font-bold text-base">5 días consecutivos</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Bitácora Detallada de Trades (Todas las 58 operaciones) -->
+    <section class="card p-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <h2 class="text-base font-bold text-white">📋 Bitácora Detallada de Trades (58 Operaciones)</h2>
+            <span class="text-xs text-gray-400">Desplázate para ver el historial completo</span>
+        </div>
+        <div class="overflow-x-auto max-h-[500px] overflow-y-auto pr-1">
+            <table class="w-full text-left text-sm">
+                <thead class="sticky top-0 bg-[#161b22] border-b border-gray-800 text-xs text-gray-400 uppercase tracking-wider">
+                    <tr>
+                        <th class="py-2.5">#</th>
+                        <th class="py-2.5">Fecha</th>
+                        <th class="py-2.5">Activo</th>
+                        <th class="py-2.5">Dirección</th>
+                        <th class="py-2.5">Resultado</th>
+                        <th class="py-2.5">Estado</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800 text-gray-300 text-xs md:text-sm" id="bitacora-body">
+                    <!-- Se llena automáticamente con Javascript abajo -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Script para cargar datos completos y renderizar gráfico -->
+    <script>
+        // Datos completos de las 58 operaciones del Word
+        const trades = [
+            {id: 1, date: "2026-08-28", asset: "ORO", dir: "COMPRA", pips: 110, status: "Ganada"},
+            {id: 2, date: "2026-08-28", asset: "NASDAQ", dir: "VENTA", pips: 150, status: "Ganada"},
+            {id: 3, date: "2026-08-28", asset: "ORO", dir: "VENTA", pips: 120, status: "Ganada"},
+            {id: 4, date: "2026-08-31", asset: "ORO", dir: "VENTA", pips: 110, status: "Ganada"},
+            {id: 5, date: "2026-08-31", asset: "NASDAQ", dir: "VENTA", pips: 20, status: "Ganada"},
+            {id: 6, date: "2026-08-31", asset: "NASDAQ", dir: "COMPRA", pips: -10, status: "Perdida"},
+            {id: 7, date: "2026-08-31", asset: "ORO", dir: "COMPRA", pips: -100, status: "Perdida"},
+            {id: 8, date: "2026-09-01", asset: "ORO", dir: "COMPRA", pips: 300, status: "Ganada"},
+            {id: 9, date: "2026-09-01", asset: "NASDAQ", dir: "VENTA", pips: -90, status: "Perdida"},
+            {id: 10, date: "2026-09-01", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 11, date: "2026-09-02", asset: "ORO", dir: "VENTA", pips: -140, status: "Perdida"},
+            {id: 12, date: "2026-09-02", asset: "ORO", dir: "VENTA", pips: 220, status: "Ganada"},
+            {id: 13, date: "2026-09-02", asset: "NASDAQ", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 14, date: "2026-09-02", asset: "ORO", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 15, date: "2026-09-03", asset: "ORO", dir: "COMPRA", pips: 120, status: "Ganada"},
+            {id: 16, date: "2026-09-03", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 17, date: "2026-09-03", asset: "ORO", dir: "VENTA", pips: 20, status: "Ganada"},
+            {id: 18, date: "2026-09-03", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 19, date: "2026-09-03", asset: "ORO", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 20, date: "2026-09-04", asset: "ORO", dir: "COMPRA", pips: -160, status: "Perdida"},
+            {id: 21, date: "2026-09-04", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 22, date: "2026-09-04", asset: "ORO", dir: "VENTA", pips: -120, status: "Perdida"},
+            {id: 23, date: "2026-09-07", asset: "ORO", dir: "COMPRA", pips: 100, status: "Ganada"},
+            {id: 24, date: "2026-09-07", asset: "ORO", dir: "COMPRA", pips: 200, status: "Ganada"},
+            {id: 25, date: "2026-09-08", asset: "ORO", dir: "VENTA", pips: -130, status: "Perdida"},
+            {id: 26, date: "2026-09-08", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 27, date: "2026-09-08", asset: "ORO", dir: "VENTA", pips: 20, status: "Ganada"},
+            {id: 28, date: "2026-09-08", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 29, date: "2026-09-08", asset: "NASDAQ", dir: "VENTA", pips: 10, status: "Ganada"},
+            {id: 30, date: "2026-09-09", asset: "ORO", dir: "VENTA", pips: 160, status: "Ganada"},
+            {id: 31, date: "2026-09-09", asset: "ORO", dir: "COMPRA", pips: -100, status: "Perdida"},
+            {id: 32, date: "2026-09-09", asset: "ORO", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 33, date: "2026-09-09", asset: "ORO", dir: "COMPRA", pips: -150, status: "Perdida"},
+            {id: 34, date: "2026-09-09", asset: "ORO", dir: "VENTA", pips: 210, status: "Ganada"},
+            {id: 35, date: "2026-09-09", asset: "ORO", dir: "VENTA", pips: 100, status: "Ganada"},
+            {id: 36, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: -30, status: "Perdida"},
+            {id: 37, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: -150, status: "Perdida"},
+            {id: 38, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: 200, status: "Ganada"},
+            {id: 39, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: -150, status: "Perdida"},
+            {id: 40, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: 200, status: "Ganada"},
+            {id: 41, date: "2026-09-10", asset: "NASDAQ", dir: "COMPRA", pips: 100, status: "Ganada"},
+            {id: 42, date: "2026-09-10", asset: "ORO", dir: "VENTA", pips: 10, status: "Ganada"},
+            {id: 43, date: "2026-09-10", asset: "ORO", dir: "VENTA", pips: 150, status: "Ganada"},
+            {id: 44, date: "2026-09-11", asset: "ORO", dir: "COMPRA", pips: -120, status: "Perdida"},
+            {id: 45, date: "2026-09-11", asset: "ORO", dir: "VENTA", pips: -210, status: "Perdida"},
+            {id: 46, date: "2026-09-11", asset: "ORO", dir: "VENTA", pips: -150, status: "Perdida"},
+            {id: 47, date: "2026-09-11", asset: "ORO", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 48, date: "2026-09-11", asset: "ORO", dir: "COMPRA", pips: -110, status: "Perdida"},
+            {id: 49, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: -120, status: "Perdida"},
+            {id: 50, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: -150, status: "Perdida"},
+            {id: 51, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 52, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: 80, status: "Ganada"},
+            {id: 53, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: 140, status: "Ganada"},
+            {id: 54, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: -150, status: "Perdida"},
+            {id: 55, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: -125, status: "Perdida"},
+            {id: 56, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: -150, status: "Perdida"},
+            {id: 57, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 58, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: 250, status: "Ganada"}
+        ];
+
+        // Llenar la tabla de la bitácora
+        const tbody = document.getElementById('bitacora-body');
+        trades.forEach(t => {
+            let pipsClass = t.pips > 0 ? 'accent-green font-bold' : (t.pips < 0 ? 'accent-red font-bold' : 'accent-gray');
+            let badgeClass = t.status === 'Ganada' ? 'badge-win' : (t.status === 'Perdida' ? 'badge-loss' : 'badge-be');
+            let formattedPips = t.pips > 0 ? `+${t.pips}` : t.pips;
+
+            tbody.innerHTML += `
+                <tr class="hover:bg-gray-800/40 transition">
+                    <td class="py-2 text-gray-500">${t.id}</td>
+                    <td class="py-2">${t.date}</td>
+                    <td class="py-2 font-semibold text-white">${t.asset}</td>
+                    <td class="py-2">${t.dir}</td>
+                    <td class="py-2 ${pipsClass}">${formattedPips} pips</td>
+                    <td class="py-2"><span class="px-2 py-0.5 text-xs rounded ${badgeClass}">${t.status}</span></td>
+                </tr>
+            `;
+        });
+
+        // Configuración del gráfico
+        const ctx = document.getElementById('sessionChart').getContext('2d');
+        const sessionData = [380, 20, 410, 80, 140, -130, 300, 100, 220, 330, -390, 125];
+        const labels = ['28 Ago', '31 Ago', '01 Sep', '02 Sep', '03 Sep', '04 Sep', '07 Sep', '08 Sep', '09 Sep', '10 Sep', '11 Sep', '14 Sep'];
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Pips por Sesión',
+                    data: sessionData,
+                    backgroundColor: sessionData.map(val => val >= 0 ? '#3fb950' : '#f85149'),
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+                    y: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
