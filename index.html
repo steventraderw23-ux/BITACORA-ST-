@@ -18,22 +18,27 @@
         .badge-loss { background-color: rgba(248, 81, 73, 0.15); color: #f85149; border: 1px solid rgba(248, 81, 73, 0.3); }
         .badge-be { background-color: rgba(139, 148, 158, 0.15); color: #8b949e; border: 1px solid rgba(139, 148, 158, 0.3); }
         
-        .tab-btn {
-            padding: 0.6rem 1.2rem;
-            font-weight: 700;
-            font-size: 0.875rem;
-            border-radius: 0.5rem;
-            border: 1px solid #30363d;
+        /* Select Menú Estilizado */
+        .month-select {
             background-color: #161b22;
-            color: #8b949e;
+            color: #ffffff;
+            border: 1px solid #30363d;
+            padding: 0.6rem 2.5rem 0.6rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%233fb950%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem top 50%;
+            background-size: 0.7rem auto;
             transition: all 0.2s ease;
         }
-        .tab-btn:hover { background-color: #21262d; color: #ffffff; }
-        .tab-btn.active {
-            background-color: #238636;
-            color: #ffffff;
+        .month-select:hover, .month-select:focus {
             border-color: #2ea043;
-            box-shadow: 0 0 10px rgba(46, 160, 67, 0.4);
+            box-shadow: 0 0 10px rgba(46, 160, 67, 0.3);
         }
     </style>
 </head>
@@ -55,13 +60,16 @@
         </div>
     </header>
 
-    <!-- NAVEGACIÓN POR PESTAÑAS (MESES) -->
-    <section>
-        <div class="flex flex-wrap gap-2 pb-2 border-b border-gray-800">
-            <button class="tab-btn active" onclick="setFilter('ALL', this)">🌐 GENERAL (TODO)</button>
-            <button class="tab-btn" onclick="setFilter('2026-09', this)">🗓️ SEPTIEMBRE 2026</button>
-            <button class="tab-btn" onclick="setFilter('2026-10', this)">🗓️ OCTUBRE 2026</button>
-        </div>
+    <!-- MENÚ DESPLEGABLE DE MESES -->
+    <section class="flex items-center justify-between card p-4">
+        <label for="month-dropdown" class="text-sm font-bold text-gray-300 flex items-center gap-2">
+            📅 SELECCIONAR PERÍODO / MES:
+        </label>
+        <select id="month-dropdown" class="month-select" onchange="setFilter(this.value)">
+            <option value="ALL">🌐 GENERAL (TODO)</option>
+            <option value="2026-09" selected>🗓️ SEPTIEMBRE 2026 (28 Ago - 30 Sep)</option>
+            <option value="2026-10">🗓️ OCTUBRE 2026</option>
+        </select>
     </section>
 
     <!-- 1. Métricas Clave (KPI Cards) -->
@@ -169,6 +177,21 @@
         </div>
     </section>
 
+    <!-- 3. Desglose por Dirección -->
+    <section class="card p-5">
+        <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2">🧭 Desglose por Dirección</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                <span class="font-medium text-gray-200" id="dir-buy-count">COMPRAS (64 trades)</span>
+                <span class="accent-green font-bold" id="dir-buy-pips">+780 pips <span class="text-xs text-gray-400" id="dir-buy-wr">(42.2% WR)</span></span>
+            </div>
+            <div class="flex justify-between items-center pb-2 border-b border-gray-800">
+                <span class="font-medium text-gray-200" id="dir-sell-count">VENTAS (82 trades)</span>
+                <span class="accent-green font-bold" id="dir-sell-pips">+2,205 pips <span class="text-xs text-gray-400" id="dir-sell-wr">(46.3% WR)</span></span>
+            </div>
+        </div>
+    </section>
+
     <!-- Gráfico / Histograma de Rendimiento por Sesión -->
     <section class="card p-5">
         <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2">
@@ -179,7 +202,7 @@
         </div>
     </section>
 
-    <!-- 3. Resumen por Sesión Diario -->
+    <!-- 4. Resumen por Sesión Diario -->
     <section class="card p-5">
         <h2 class="text-base font-bold text-white mb-4">📅 Resumen por Sesión</h2>
         <div class="overflow-x-auto">
@@ -196,6 +219,37 @@
                     <!-- Se llena automáticamente -->
                 </tbody>
             </table>
+        </div>
+    </section>
+
+    <!-- 5. Métricas Adicionales -->
+    <section class="card p-5">
+        <h2 class="text-base font-bold text-white mb-4">📌 Métricas Adicionales</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Mejor Operación</span>
+                <span class="accent-green font-bold text-base" id="extra-best-trade">+300 pips</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Peor Operación</span>
+                <span class="accent-red font-bold text-base" id="extra-worst-trade">-210 pips</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Expectativa por Operación</span>
+                <span class="text-white font-bold text-base" id="extra-expectancy">+20.4 pips</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Mejor Día</span>
+                <span class="accent-green font-bold text-base" id="extra-best-day">28-sep-2026 (+650 pips)</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Peor Día</span>
+                <span class="accent-red font-bold text-base" id="extra-worst-day">11-sep-2026 (-390 pips)</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Efectividad de Días</span>
+                <span class="accent-green font-bold text-base" id="extra-day-wr">70.8% Positivos (17/24)</span>
+            </div>
         </div>
     </section>
 
@@ -374,20 +428,17 @@
             {id: 146, date: "2026-09-30", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"}
         ];
 
-        let currentFilter = 'ALL';
+        let currentFilter = '2026-09';
         let sessionChart = null;
 
-        function setFilter(filter, btn) {
+        function setFilter(filter) {
             currentFilter = filter;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
             renderDashboard();
         }
 
         function filterTrades() {
             if (currentFilter === 'ALL') return trades;
             if (currentFilter === '2026-09') {
-                // Septiembre abarca desde el 28-Ago-2026 hasta el 30-Sep-2026
                 return trades.filter(t => t.date >= '2026-08-28' && t.date <= '2026-09-30');
             }
             if (currentFilter === '2026-10') {
@@ -406,14 +457,41 @@
             let oroPips = 0, oroWins = 0, oroLosses = 0, oroBE = 0;
             let nasPips = 0, nasWins = 0, nasLosses = 0, nasBE = 0;
 
+            let buyPips = 0, buyWins = 0, buyTotal = 0;
+            let sellPips = 0, sellWins = 0, sellTotal = 0;
+
+            let maxWin = 0, maxLoss = 0;
+            let bestTradeInfo = 'N/A', worstTradeInfo = 'N/A';
+
             const sessionMap = {};
 
             filtered.forEach(t => {
                 totalPips += t.pips;
-                if (t.pips > 0) { posPips += t.pips; wins++; }
-                else if (t.pips < 0) { negPips += Math.abs(t.pips); losses++; }
-                else { be++; }
+                if (t.pips > 0) {
+                    posPips += t.pips;
+                    wins++;
+                    if (t.pips > maxWin) { maxWin = t.pips; bestTradeInfo = `+${t.pips} pips (${t.date})`; }
+                } else if (t.pips < 0) {
+                    const absLoss = Math.abs(t.pips);
+                    negPips += absLoss;
+                    losses++;
+                    if (absLoss > maxLoss) { maxLoss = absLoss; worstTradeInfo = `-${absLoss} pips (${t.date})`; }
+                } else {
+                    be++;
+                }
 
+                // Dirección
+                if (t.dir === 'COMPRA') {
+                    buyTotal++;
+                    buyPips += t.pips;
+                    if (t.pips > 0) buyWins++;
+                } else if (t.dir === 'VENTA') {
+                    sellTotal++;
+                    sellPips += t.pips;
+                    if (t.pips > 0) sellWins++;
+                }
+
+                // Activo
                 if (t.asset === 'ORO') {
                     oroPips += t.pips;
                     if (t.pips > 0) oroWins++;
@@ -435,7 +513,7 @@
             const avgWin = wins > 0 ? `+${(posPips / wins).toFixed(1)} pips` : '0 pips';
             const avgLoss = losses > 0 ? `-${(negPips / losses).toFixed(1)} pips` : '0 pips';
 
-            // Actualizar DOM
+            // Actualizar DOM KPIs principales
             document.getElementById('kpi-net-pips').innerText = (totalPips >= 0 ? '+' : '') + totalPips.toLocaleString();
             document.getElementById('kpi-pos-pips').innerText = '+' + posPips.toLocaleString();
             document.getElementById('kpi-neg-pips').innerText = '-' + negPips.toLocaleString();
@@ -463,19 +541,52 @@
             document.getElementById('nas-wr-bar').style.width = `${nasWR}%`;
             document.getElementById('nas-ratio').innerText = `${nasWins} W - ${nasLosses} L`;
 
-            // Badge periodo
+            // Desglose por Dirección
+            const buyWR = buyTotal > 0 ? ((buyWins / buyTotal) * 100).toFixed(1) : '0.0';
+            const sellWR = sellTotal > 0 ? ((sellWins / sellTotal) * 100).toFixed(1) : '0.0';
+            document.getElementById('dir-buy-count').innerText = `COMPRAS (${buyTotal} trades)`;
+            document.getElementById('dir-buy-pips').innerHTML = `${buyPips >= 0 ? '+' : ''}${buyPips.toLocaleString()} pips <span class="text-xs text-gray-400">(${buyWR}% WR)</span>`;
+            document.getElementById('dir-sell-count').innerText = `VENTAS (${sellTotal} trades)`;
+            document.getElementById('dir-sell-pips').innerHTML = `${sellPips >= 0 ? '+' : ''}${sellPips.toLocaleString()} pips <span class="text-xs text-gray-400">(${sellWR}% WR)</span>`;
+
+            // Badge Periodo
             const badge = document.getElementById('period-badge');
-            if (currentFilter === 'ALL') badge.innerText = '28 Ago - 30 Sep 2026';
+            if (currentFilter === 'ALL') badge.innerText = 'Histórico Completo';
             else if (currentFilter === '2026-09') badge.innerText = '28 Ago - 30 Sep 2026';
             else if (currentFilter === '2026-10') badge.innerText = 'Octubre 2026';
+
+            // Días Estadísticas
+            const sessionDates = Object.keys(sessionMap).sort();
+            let posDays = 0, negDays = 0;
+            let bestDay = 'N/A', worstDay = 'N/A';
+            let maxDayPips = -Infinity, minDayPips = Infinity;
+
+            sessionDates.forEach(d => {
+                const dayPips = sessionMap[d];
+                if (dayPips >= 0) posDays++; else negDays++;
+
+                if (dayPips > maxDayPips) { maxDayPips = dayPips; bestDay = `${d} (+${dayPips} pips)`; }
+                if (dayPips < minDayPips) { minDayPips = dayPips; worstDay = `${d} (${dayPips} pips)`; }
+            });
+
+            const dayTotal = sessionDates.length;
+            const dayWR = dayTotal > 0 ? ((posDays / dayTotal) * 100).toFixed(1) : '0.0';
+            const expectancy = totalCount > 0 ? (totalPips / totalCount).toFixed(1) : '0.0';
+
+            // Métricas Adicionales DOM
+            document.getElementById('extra-best-trade').innerText = bestTradeInfo;
+            document.getElementById('extra-worst-trade').innerText = worstTradeInfo;
+            document.getElementById('extra-expectancy').innerText = `${expectancy >= 0 ? '+' : ''}${expectancy} pips`;
+            document.getElementById('extra-best-day').innerText = dayTotal > 0 ? bestDay : 'N/A';
+            document.getElementById('extra-worst-day').innerText = dayTotal > 0 ? worstDay : 'N/A';
+            document.getElementById('extra-day-wr').innerText = `${dayWR}% Positivos (${posDays}/${dayTotal})`;
 
             // Tabla Sesiones
             const sessionTbody = document.getElementById('session-table-body');
             sessionTbody.innerHTML = '';
-            const sessionDates = Object.keys(sessionMap).sort();
 
             if (sessionDates.length === 0) {
-                sessionTbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-gray-500">Sin datos registrados para este período.</td></tr>`;
+                sessionTbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-gray-500">Sin operaciones registradas en este período.</td></tr>`;
             } else {
                 sessionDates.forEach(d => {
                     const pips = sessionMap[d];
