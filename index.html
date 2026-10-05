@@ -186,4 +186,499 @@
                 <span class="accent-red font-bold" id="dir-buy-pips">-260 pips <span class="text-xs text-gray-400" id="dir-buy-wr">(40.0% WR)</span></span>
             </div>
             <div class="flex justify-between items-center pb-2 border-b border-gray-800">
-                <span class="font-medium text-gray-200"
+                <span class="font-medium text-gray-200" id="dir-sell-count">VENTAS (6 trades)</span>
+                <span class="accent-green font-bold" id="dir-sell-pips">+15 pips <span class="text-xs text-gray-400" id="dir-sell-wr">(16.7% WR)</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gráfico / Histograma de Rendimiento por Sesión -->
+    <section class="card p-5">
+        <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+            📊 Histograma de Rendimiento por Sesión (Pips)
+        </h2>
+        <div class="relative w-full h-72 md:h-80">
+            <canvas id="sessionChart"></canvas>
+        </div>
+    </section>
+
+    <!-- 4. Resumen por Sesión Diario -->
+    <section class="card p-5">
+        <h2 class="text-base font-bold text-white mb-4">📅 Resumen por Sesión</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+                <thead>
+                    <tr class="text-gray-400 border-b border-gray-800 text-xs uppercase tracking-wider">
+                        <th class="pb-3">Fecha</th>
+                        <th class="pb-3">Día</th>
+                        <th class="pb-3">Pips del Día</th>
+                        <th class="pb-3">Resultado</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800 text-gray-300" id="session-table-body">
+                    <!-- Se llena automáticamente -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 5. Métricas Adicionales -->
+    <section class="card p-5">
+        <h2 class="text-base font-bold text-white mb-4">📌 Métricas Adicionales</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Mejor Operación</span>
+                <span class="accent-green font-bold text-base" id="extra-best-trade">+300 pips</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Peor Operación</span>
+                <span class="accent-red font-bold text-base" id="extra-worst-trade">-140 pips</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Expectativa por Operación</span>
+                <span class="text-white font-bold text-base" id="extra-expectancy">-22.3 pips</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Mejor Día</span>
+                <span class="accent-green font-bold text-base" id="extra-best-day">2026-10-02 (+135 pips)</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Peor Día</span>
+                <span class="accent-red font-bold text-base" id="extra-worst-day">2026-10-01 (-380 pips)</span>
+            </div>
+            <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
+                <span class="text-gray-400 block text-xs">Efectividad de Días</span>
+                <span class="text-white font-bold text-base" id="extra-day-wr">50.0% Positivos (1/2)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bitácora Detallada de Trades -->
+    <section class="card p-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <h2 class="text-base font-bold text-white" id="bitacora-title">📋 Bitácora Detallada de Trades</h2>
+            <span class="text-xs text-gray-400">Desplázate para ver el historial completo</span>
+        </div>
+        <div class="overflow-x-auto max-h-[500px] overflow-y-auto pr-1">
+            <table class="w-full text-left text-sm">
+                <thead class="sticky top-0 bg-[#161b22] border-b border-gray-800 text-xs text-gray-400 uppercase tracking-wider">
+                    <tr>
+                        <th class="py-2.5">#</th>
+                        <th class="py-2.5">Fecha</th>
+                        <th class="py-2.5">Activo</th>
+                        <th class="py-2.5">Dirección</th>
+                        <th class="py-2.5">Resultado</th>
+                        <th class="py-2.5">Estado</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800 text-gray-300 text-xs md:text-sm" id="bitacora-body">
+                    <!-- Se llena automáticamente -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script>
+        const trades = [
+            {id: 1, date: "2026-08-28", asset: "ORO", dir: "COMPRA", pips: 110, status: "Ganada"},
+            {id: 2, date: "2026-08-28", asset: "NASDAQ", dir: "VENTA", pips: 150, status: "Ganada"},
+            {id: 3, date: "2026-08-28", asset: "ORO", dir: "VENTA", pips: 120, status: "Ganada"},
+            {id: 4, date: "2026-08-31", asset: "ORO", dir: "VENTA", pips: 110, status: "Ganada"},
+            {id: 5, date: "2026-08-31", asset: "NASDAQ", dir: "VENTA", pips: 20, status: "Ganada"},
+            {id: 6, date: "2026-08-31", asset: "NASDAQ", dir: "COMPRA", pips: -10, status: "Perdida"},
+            {id: 7, date: "2026-08-31", asset: "ORO", dir: "COMPRA", pips: -100, status: "Perdida"},
+            {id: 8, date: "2026-09-01", asset: "ORO", dir: "COMPRA", pips: 300, status: "Ganada"},
+            {id: 9, date: "2026-09-01", asset: "NASDAQ", dir: "VENTA", pips: -90, status: "Perdida"},
+            {id: 10, date: "2026-09-01", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 11, date: "2026-09-02", asset: "ORO", dir: "VENTA", pips: -140, status: "Perdida"},
+            {id: 12, date: "2026-09-02", asset: "ORO", dir: "VENTA", pips: 220, status: "Ganada"},
+            {id: 13, date: "2026-09-02", asset: "NASDAQ", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 14, date: "2026-09-02", asset: "ORO", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 15, date: "2026-09-03", asset: "ORO", dir: "COMPRA", pips: 120, status: "Ganada"},
+            {id: 16, date: "2026-09-03", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 17, date: "2026-09-03", asset: "ORO", dir: "VENTA", pips: 20, status: "Ganada"},
+            {id: 18, date: "2026-09-03", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 19, date: "2026-09-03", asset: "ORO", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 20, date: "2026-09-04", asset: "ORO", dir: "COMPRA", pips: -160, status: "Perdida"},
+            {id: 21, date: "2026-09-04", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 22, date: "2026-09-04", asset: "ORO", dir: "VENTA", pips: -120, status: "Perdida"},
+            {id: 23, date: "2026-09-07", asset: "ORO", dir: "COMPRA", pips: 100, status: "Ganada"},
+            {id: 24, date: "2026-09-07", asset: "ORO", dir: "COMPRA", pips: 200, status: "Ganada"},
+            {id: 25, date: "2026-09-08", asset: "ORO", dir: "VENTA", pips: -130, status: "Perdida"},
+            {id: 26, date: "2026-09-08", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 27, date: "2026-09-08", asset: "ORO", dir: "VENTA", pips: 20, status: "Ganada"},
+            {id: 28, date: "2026-09-08", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 29, date: "2026-09-08", asset: "NASDAQ", dir: "VENTA", pips: 10, status: "Ganada"},
+            {id: 30, date: "2026-09-09", asset: "ORO", dir: "VENTA", pips: 160, status: "Ganada"},
+            {id: 31, date: "2026-09-09", asset: "ORO", dir: "COMPRA", pips: -100, status: "Perdida"},
+            {id: 32, date: "2026-09-09", asset: "ORO", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 33, date: "2026-09-09", asset: "ORO", dir: "COMPRA", pips: -150, status: "Perdida"},
+            {id: 34, date: "2026-09-09", asset: "ORO", dir: "VENTA", pips: 210, status: "Ganada"},
+            {id: 35, date: "2026-09-09", asset: "ORO", dir: "VENTA", pips: 100, status: "Ganada"},
+            {id: 36, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: -30, status: "Perdida"},
+            {id: 37, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: -150, status: "Perdida"},
+            {id: 38, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: 200, status: "Ganada"},
+            {id: 39, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: -150, status: "Perdida"},
+            {id: 40, date: "2026-09-10", asset: "ORO", dir: "COMPRA", pips: 200, status: "Ganada"},
+            {id: 41, date: "2026-09-10", asset: "NASDAQ", dir: "COMPRA", pips: 100, status: "Ganada"},
+            {id: 42, date: "2026-09-10", asset: "ORO", dir: "VENTA", pips: 10, status: "Ganada"},
+            {id: 43, date: "2026-09-10", asset: "ORO", dir: "VENTA", pips: 150, status: "Ganada"},
+            {id: 44, date: "2026-09-11", asset: "ORO", dir: "COMPRA", pips: -120, status: "Perdida"},
+            {id: 45, date: "2026-09-11", asset: "ORO", dir: "VENTA", pips: -210, status: "Perdida"},
+            {id: 46, date: "2026-09-11", asset: "ORO", dir: "VENTA", pips: -150, status: "Perdida"},
+            {id: 47, date: "2026-09-11", asset: "ORO", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 48, date: "2026-09-11", asset: "ORO", dir: "COMPRA", pips: -110, status: "Perdida"},
+            {id: 49, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: -120, status: "Perdida"},
+            {id: 50, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: -150, status: "Perdida"},
+            {id: 51, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 52, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: 80, status: "Ganada"},
+            {id: 53, date: "2026-09-14", asset: "ORO", dir: "COMPRA", pips: 140, status: "Ganada"},
+            {id: 54, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: -150, status: "Perdida"},
+            {id: 55, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: -125, status: "Perdida"},
+            {id: 56, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: -150, status: "Perdida"},
+            {id: 57, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 58, date: "2026-09-14", asset: "ORO", dir: "VENTA", pips: 250, status: "Ganada"},
+            {id: 59, date: "2026-09-15", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 60, date: "2026-09-15", asset: "ORO", dir: "VENTA", pips: -100, status: "Perdida"},
+            {id: 61, date: "2026-09-15", asset: "NASDAQ", dir: "VENTA", pips: -110, status: "Perdida"},
+            {id: 62, date: "2026-09-15", asset: "ORO", dir: "COMPRA", pips: -110, status: "Perdida"},
+            {id: 63, date: "2026-09-15", asset: "ORO", dir: "COMPRA", pips: -120, status: "Perdida"},
+            {id: 64, date: "2026-09-15", asset: "ORO", dir: "COMPRA", pips: 110, status: "Ganada"},
+            {id: 65, date: "2026-09-15", asset: "ORO", dir: "COMPRA", pips: 220, status: "Ganada"},
+            {id: 66, date: "2026-09-16", asset: "ORO", dir: "COMPRA", pips: -80, status: "Perdida"},
+            {id: 67, date: "2026-09-16", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 68, date: "2026-09-16", asset: "ORO", dir: "COMPRA", pips: -60, status: "Perdida"},
+            {id: 69, date: "2026-09-16", asset: "ORO", dir: "COMPRA", pips: -75, status: "Perdida"},
+            {id: 70, date: "2026-09-16", asset: "ORO", dir: "VENTA", pips: -55, status: "Perdida"},
+            {id: 71, date: "2026-09-16", asset: "ORO", dir: "VENTA", pips: -110, status: "Perdida"},
+            {id: 72, date: "2026-09-16", asset: "ORO", dir: "VENTA", pips: -110, status: "Perdida"},
+            {id: 73, date: "2026-09-16", asset: "ORO", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 74, date: "2026-09-16", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 75, date: "2026-09-17", asset: "ORO", dir: "VENTA", pips: -100, status: "Perdida"},
+            {id: 76, date: "2026-09-17", asset: "ORO", dir: "VENTA", pips: 100, status: "Ganada"},
+            {id: 77, date: "2026-09-17", asset: "ORO", dir: "VENTA", pips: -70, status: "Perdida"},
+            {id: 78, date: "2026-09-17", asset: "ORO", dir: "COMPRA", pips: -100, status: "Perdida"},
+            {id: 79, date: "2026-09-17", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 80, date: "2026-09-17", asset: "ORO", dir: "COMPRA", pips: -80, status: "Perdida"},
+            {id: 81, date: "2026-09-17", asset: "ORO", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 82, date: "2026-09-17", asset: "NASDAQ", dir: "VENTA", pips: -20, status: "Perdida"},
+            {id: 83, date: "2026-09-18", asset: "ORO", dir: "VENTA", pips: 75, status: "Ganada"},
+            {id: 84, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: -35, status: "Perdida"},
+            {id: 85, date: "2026-09-18", asset: "ORO", dir: "VENTA", pips: 100, status: "Ganada"},
+            {id: 86, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: 55, status: "Ganada"},
+            {id: 87, date: "2026-09-18", asset: "ORO", dir: "VENTA", pips: 120, status: "Ganada"},
+            {id: 88, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: 50, status: "Ganada"},
+            {id: 89, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 90, date: "2026-09-18", asset: "NASDAQ", dir: "COMPRA", pips: -130, status: "Perdida"},
+            {id: 91, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: -60, status: "Perdida"},
+            {id: 92, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: -80, status: "Perdida"},
+            {id: 93, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: -80, status: "Perdida"},
+            {id: 94, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: -50, status: "Perdida"},
+            {id: 95, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: -30, status: "Perdida"},
+            {id: 96, date: "2026-09-18", asset: "ORO", dir: "COMPRA", pips: 300, status: "Ganada"},
+            {id: 97, date: "2026-09-21", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 98, date: "2026-09-21", asset: "ORO", dir: "COMPRA", pips: -120, status: "Perdida"},
+            {id: 99, date: "2026-09-21", asset: "ORO", dir: "COMPRA", pips: 100, status: "Ganada"},
+            {id: 100, date: "2026-09-21", asset: "ORO", dir: "COMPRA", pips: -90, status: "Perdida"},
+            {id: 101, date: "2026-09-21", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 102, date: "2026-09-21", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 103, date: "2026-09-22", asset: "ORO", dir: "COMPRA", pips: -30, status: "Perdida"},
+            {id: 104, date: "2026-09-22", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 105, date: "2026-09-22", asset: "NASDAQ", dir: "VENTA", pips: -130, status: "Perdida"},
+            {id: 106, date: "2026-09-22", asset: "ORO", dir: "VENTA", pips: -100, status: "Perdida"},
+            {id: 107, date: "2026-09-22", asset: "NASDAQ", dir: "VENTA", pips: -80, status: "Perdida"},
+            {id: 108, date: "2026-09-22", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 109, date: "2026-09-23", asset: "NASDAQ", dir: "VENTA", pips: 300, status: "Ganada"},
+            {id: 110, date: "2026-09-23", asset: "ORO", dir: "VENTA", pips: -100, status: "Perdida"},
+            {id: 111, date: "2026-09-23", asset: "ORO", dir: "VENTA", pips: -50, status: "Perdida"},
+            {id: 112, date: "2026-09-23", asset: "ORO", dir: "VENTA", pips: 150, status: "Ganada"},
+            {id: 113, date: "2026-09-23", asset: "NASDAQ", dir: "VENTA", pips: 100, status: "Ganada"},
+            {id: 114, date: "2026-09-24", asset: "ORO", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 115, date: "2026-09-24", asset: "NASDAQ", dir: "VENTA", pips: 100, status: "Ganada"},
+            {id: 116, date: "2026-09-24", asset: "ORO", dir: "COMPRA", pips: 60, status: "Ganada"},
+            {id: 117, date: "2026-09-24", asset: "ORO", dir: "COMPRA", pips: 0, status: "Break Even"},
+            {id: 118, date: "2026-09-24", asset: "ORO", dir: "COMPRA", pips: -80, status: "Perdida"},
+            {id: 119, date: "2026-09-24", asset: "NASDAQ", dir: "VENTA", pips: -85, status: "Perdida"},
+            {id: 120, date: "2026-09-24", asset: "ORO", dir: "COMPRA", pips: 100, status: "Ganada"},
+            {id: 121, date: "2026-09-25", asset: "NASDAQ", dir: "VENTA", pips: -125, status: "Perdida"},
+            {id: 122, date: "2026-09-25", asset: "ORO", dir: "VENTA", pips: 150, status: "Ganada"},
+            {id: 123, date: "2026-09-25", asset: "ORO", dir: "VENTA", pips: 125, status: "Ganada"},
+            {id: 124, date: "2026-09-25", asset: "NASDAQ", dir: "COMPRA", pips: -80, status: "Perdida"},
+            {id: 125, date: "2026-09-25", asset: "NASDAQ", dir: "VENTA", pips: 125, status: "Ganada"},
+            {id: 126, date: "2026-09-25", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 127, date: "2026-09-25", asset: "ORO", dir: "COMPRA", pips: -100, status: "Perdida"},
+            {id: 128, date: "2026-09-25", asset: "NASDAQ", dir: "VENTA", pips: -100, status: "Perdida"},
+            {id: 129, date: "2026-09-28", asset: "NASDAQ", dir: "VENTA", pips: 250, status: "Ganada"},
+            {id: 130, date: "2026-09-28", asset: "ORO", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 131, date: "2026-09-28", asset: "ORO", dir: "COMPRA", pips: 300, status: "Ganada"},
+            {id: 132, date: "2026-09-28", asset: "NASDAQ", dir: "VENTA", pips: -100, status: "Perdida"},
+            {id: 133, date: "2026-09-29", asset: "NASDAQ", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 134, date: "2026-09-29", asset: "NASDAQ", dir: "VENTA", pips: 100, status: "Ganada"},
+            {id: 135, date: "2026-09-29", asset: "ORO", dir: "COMPRA", pips: -110, status: "Perdida"},
+            {id: 136, date: "2026-09-29", asset: "ORO", dir: "VENTA", pips: -80, status: "Perdida"},
+            {id: 137, date: "2026-09-29", asset: "ORO", dir: "VENTA", pips: 130, status: "Ganada"},
+            {id: 138, date: "2026-09-29", asset: "NASDAQ", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 139, date: "2026-09-30", asset: "ORO", dir: "VENTA", pips: -70, status: "Perdida"},
+            {id: 140, date: "2026-09-30", asset: "ORO", dir: "VENTA", pips: -70, status: "Perdida"},
+            {id: 141, date: "2026-09-30", asset: "NASDAQ", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 142, date: "2026-09-30", asset: "ORO", dir: "VENTA", pips: 150, status: "Ganada"},
+            {id: 143, date: "2026-09-30", asset: "NASDAQ", dir: "VENTA", pips: -100, status: "Perdida"},
+            {id: 144, date: "2026-09-30", asset: "ORO", dir: "COMPRA", pips: -80, status: "Perdida"},
+            {id: 145, date: "2026-09-30", asset: "ORO", dir: "COMPRA", pips: -80, status: "Perdida"},
+            {id: 146, date: "2026-09-30", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"},
+            // Octubre 2026
+            {id: 147, date: "2026-10-01", asset: "NASDAQ", dir: "COMPRA", pips: -95, status: "Perdida"},
+            {id: 148, date: "2026-10-01", asset: "ORO", dir: "VENTA", pips: -95, status: "Perdida"},
+            {id: 149, date: "2026-10-01", asset: "ORO", dir: "VENTA", pips: -95, status: "Perdida"},
+            {id: 150, date: "2026-10-01", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 151, date: "2026-10-01", asset: "ORO", dir: "VENTA", pips: -95, status: "Perdida"},
+            // Sesión del Viernes 02-Oct-2026
+            {id: 152, date: "2026-10-02", asset: "ORO", dir: "VENTA", pips: 300, status: "Ganada"},
+            {id: 153, date: "2026-10-02", asset: "ORO", dir: "COMPRA", pips: 100, status: "Ganada"},
+            {id: 154, date: "2026-10-02", asset: "NASDAQ", dir: "COMPRA", pips: 100, status: "Ganada"},
+            {id: 155, date: "2026-10-02", asset: "ORO", dir: "COMPRA", pips: -125, status: "Perdida"},
+            {id: 156, date: "2026-10-02", asset: "ORO", dir: "COMPRA", pips: -100, status: "Perdida"},
+            {id: 157, date: "2026-10-02", asset: "ORO", dir: "COMPRA", pips: -140, status: "Perdida"}
+        ];
+
+        let currentFilter = '2026-10';
+        let sessionChart = null;
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            renderDashboard();
+        }
+
+        function filterTrades() {
+            if (currentFilter === 'ALL') return trades;
+            if (currentFilter === '2026-09') {
+                return trades.filter(t => t.date >= '2026-08-28' && t.date <= '2026-09-30');
+            }
+            if (currentFilter === '2026-10') {
+                return trades.filter(t => t.date.startsWith('2026-10'));
+            }
+            return trades.filter(t => t.date.startsWith(currentFilter));
+        }
+
+        function renderDashboard() {
+            const filtered = filterTrades();
+
+            let totalPips = 0, posPips = 0, negPips = 0;
+            let wins = 0, losses = 0, be = 0;
+
+            let oroPips = 0, oroWins = 0, oroLosses = 0, oroBE = 0;
+            let nasPips = 0, nasWins = 0, nasLosses = 0, nasBE = 0;
+
+            let buyPips = 0, buyWins = 0, buyTotal = 0;
+            let sellPips = 0, sellWins = 0, sellTotal = 0;
+
+            let maxWin = 0, maxLoss = 0;
+            let bestTradeInfo = 'N/A', worstTradeInfo = 'N/A';
+
+            const sessionMap = {};
+
+            filtered.forEach(t => {
+                totalPips += t.pips;
+                if (t.pips > 0) {
+                    posPips += t.pips;
+                    wins++;
+                    if (t.pips > maxWin) { maxWin = t.pips; bestTradeInfo = `+${t.pips} pips (${t.date})`; }
+                } else if (t.pips < 0) {
+                    const absLoss = Math.abs(t.pips);
+                    negPips += absLoss;
+                    losses++;
+                    if (absLoss > maxLoss) { maxLoss = absLoss; worstTradeInfo = `-${absLoss} pips (${t.date})`; }
+                } else {
+                    be++;
+                }
+
+                if (t.dir === 'COMPRA') {
+                    buyTotal++;
+                    buyPips += t.pips;
+                    if (t.pips > 0) buyWins++;
+                } else if (t.dir === 'VENTA') {
+                    sellTotal++;
+                    sellPips += t.pips;
+                    if (t.pips > 0) sellWins++;
+                }
+
+                if (t.asset === 'ORO') {
+                    oroPips += t.pips;
+                    if (t.pips > 0) oroWins++;
+                    else if (t.pips < 0) oroLosses++;
+                    else oroBE++;
+                } else if (t.asset === 'NASDAQ') {
+                    nasPips += t.pips;
+                    if (t.pips > 0) nasWins++;
+                    else if (t.pips < 0) nasLosses++;
+                    else nasBE++;
+                }
+
+                sessionMap[t.date] = (sessionMap[t.date] || 0) + t.pips;
+            });
+
+            const totalCount = filtered.length;
+            const winRate = totalCount > 0 ? ((wins / totalCount) * 100).toFixed(1) : '0.0';
+            const pf = negPips > 0 ? (posPips / negPips).toFixed(2) : (posPips > 0 ? 'INF' : '0.00');
+            const avgWin = wins > 0 ? `+${(posPips / wins).toFixed(1)} pips` : '0 pips';
+            const avgLoss = losses > 0 ? `-${(negPips / losses).toFixed(1)} pips` : '0 pips';
+
+            document.getElementById('kpi-net-pips').innerText = (totalPips >= 0 ? '+' : '') + totalPips.toLocaleString();
+            document.getElementById('kpi-net-pips').className = totalPips >= 0 ? "text-2xl md:text-3xl font-bold accent-green mt-1" : "text-2xl md:text-3xl font-bold accent-red mt-1";
+            document.getElementById('kpi-pos-pips').innerText = '+' + posPips.toLocaleString();
+            document.getElementById('kpi-neg-pips').innerText = '-' + negPips.toLocaleString();
+            document.getElementById('kpi-winrate').innerText = winRate + '%';
+            document.getElementById('kpi-pf').innerText = pf;
+            document.getElementById('kpi-total-trades').innerText = totalCount;
+            document.getElementById('kpi-avg-win').innerText = avgWin;
+            document.getElementById('kpi-avg-loss').innerText = avgLoss;
+
+            const oroTotal = oroWins + oroLosses + oroBE;
+            const oroWR = oroTotal > 0 ? ((oroWins / oroTotal) * 100).toFixed(1) : '0.0';
+            document.getElementById('oro-trades-count').innerText = `${oroTotal} Trades`;
+            document.getElementById('oro-net-pips').innerText = (oroPips >= 0 ? '+' : '') + oroPips.toLocaleString() + ' pips';
+            document.getElementById('oro-net-pips').className = oroPips >= 0 ? "accent-green font-bold text-base" : "accent-red font-bold text-base";
+            document.getElementById('oro-wr-text').innerText = `${oroWR}% (${oroWins}W / ${oroLosses}L / ${oroBE}BE)`;
+            document.getElementById('oro-wr-bar').style.width = `${oroWR}%`;
+            document.getElementById('oro-ratio').innerText = `${oroWins} W - ${oroLosses} L`;
+
+            const nasTotal = nasWins + nasLosses + nasBE;
+            const nasWR = nasTotal > 0 ? ((nasWins / nasTotal) * 100).toFixed(1) : '0.0';
+            document.getElementById('nas-trades-count').innerText = `${nasTotal} Trades`;
+            document.getElementById('nas-net-pips').innerText = (nasPips >= 0 ? '+' : '') + nasPips.toLocaleString() + ' pips';
+            document.getElementById('nas-net-pips').className = nasPips >= 0 ? "accent-green font-bold text-base" : "accent-red font-bold text-base";
+            document.getElementById('nas-wr-text').innerText = `${nasWR}% (${nasWins}W / ${nasLosses}L / ${nasBE}BE)`;
+            document.getElementById('nas-wr-bar').style.width = `${nasWR}%`;
+            document.getElementById('nas-ratio').innerText = `${nasWins} W - ${nasLosses} L`;
+
+            const buyWR = buyTotal > 0 ? ((buyWins / buyTotal) * 100).toFixed(1) : '0.0';
+            const sellWR = sellTotal > 0 ? ((sellWins / sellTotal) * 100).toFixed(1) : '0.0';
+            document.getElementById('dir-buy-count').innerText = `COMPRAS (${buyTotal} trades)`;
+            document.getElementById('dir-buy-pips').innerHTML = `${buyPips >= 0 ? '+' : ''}${buyPips.toLocaleString()} pips <span class="text-xs text-gray-400">(${buyWR}% WR)</span>`;
+            document.getElementById('dir-buy-pips').className = buyPips >= 0 ? "accent-green font-bold" : "accent-red font-bold";
+            document.getElementById('dir-sell-count').innerText = `VENTAS (${sellTotal} trades)`;
+            document.getElementById('dir-sell-pips').innerHTML = `${sellPips >= 0 ? '+' : ''}${sellPips.toLocaleString()} pips <span class="text-xs text-gray-400">(${sellWR}% WR)</span>`;
+            document.getElementById('dir-sell-pips').className = sellPips >= 0 ? "accent-green font-bold" : "accent-red font-bold";
+
+            const badge = document.getElementById('period-badge');
+            if (currentFilter === 'ALL') badge.innerText = 'Histórico Completo';
+            else if (currentFilter === '2026-09') badge.innerText = '28 Ago - 30 Sep 2026';
+            else if (currentFilter === '2026-10') badge.innerText = 'Octubre 2026';
+
+            const sessionDates = Object.keys(sessionMap).sort();
+            let posDays = 0, negDays = 0;
+            let bestDay = 'N/A', worstDay = 'N/A';
+            let maxDayPips = -Infinity, minDayPips = Infinity;
+
+            sessionDates.forEach(d => {
+                const dayPips = sessionMap[d];
+                if (dayPips >= 0) posDays++; else negDays++;
+
+                if (dayPips > maxDayPips) { maxDayPips = dayPips; bestDay = `${d} (+${dayPips} pips)`; }
+                if (dayPips < minDayPips) { minDayPips = dayPips; worstDay = `${d} (${dayPips} pips)`; }
+            });
+
+            const dayTotal = sessionDates.length;
+            const dayWR = dayTotal > 0 ? ((posDays / dayTotal) * 100).toFixed(1) : '0.0';
+            const expectancy = totalCount > 0 ? (totalPips / totalCount).toFixed(1) : '0.0';
+
+            document.getElementById('extra-best-trade').innerText = wins > 0 ? bestTradeInfo : 'N/A';
+            document.getElementById('extra-worst-trade').innerText = losses > 0 ? worstTradeInfo : 'N/A';
+            document.getElementById('extra-expectancy').innerText = `${expectancy >= 0 ? '+' : ''}${expectancy} pips`;
+            document.getElementById('extra-best-day').innerText = posDays > 0 ? bestDay : 'N/A';
+            document.getElementById('extra-worst-day').innerText = negDays > 0 ? worstDay : 'N/A';
+            document.getElementById('extra-day-wr').innerText = `${dayWR}% Positivos (${posDays}/${dayTotal})`;
+            document.getElementById('extra-day-wr').className = posDays >= negDays ? "accent-green font-bold text-base" : "accent-red font-bold text-base";
+
+            const sessionTbody = document.getElementById('session-table-body');
+            sessionTbody.innerHTML = '';
+
+            if (sessionDates.length === 0) {
+                sessionTbody.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-gray-500">Sin operaciones registradas en este período.</td></tr>`;
+            } else {
+                sessionDates.forEach(d => {
+                    const pips = sessionMap[d];
+                    const isWin = pips >= 0;
+                    const dateObj = new Date(d + 'T00:00:00');
+                    const dayName = dateObj.toLocaleDateString('es-ES', { weekday: 'long' });
+                    const capDay = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+                    const formattedPips = isWin ? `+${pips}` : `${pips}`;
+                    const badgeClass = isWin ? 'badge-win' : 'badge-loss';
+                    const badgeText = isWin ? 'Positivo' : 'Negativo';
+
+                    sessionTbody.innerHTML += `
+                        <tr>
+                            <td class="py-2.5">${d}</td>
+                            <td class="capitalize">${capDay}</td>
+                            <td class="${isWin ? 'accent-green' : 'accent-red'} font-semibold">${formattedPips}</td>
+                            <td><span class="px-2 py-0.5 text-xs rounded ${badgeClass}">${badgeText}</span></td>
+                        </tr>
+                    `;
+                });
+            }
+
+            const tbody = document.getElementById('bitacora-body');
+            tbody.innerHTML = '';
+            document.getElementById('bitacora-title').innerText = `📋 Bitácora Detallada de Trades (${filtered.length} Operaciones)`;
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-gray-500">No hay trades guardados en este mes todavía.</td></tr>`;
+            } else {
+                filtered.slice().reverse().forEach(t => {
+                    let pipsClass = t.pips > 0 ? 'accent-green font-bold' : (t.pips < 0 ? 'accent-red font-bold' : 'accent-gray');
+                    let badgeClass = t.status === 'Ganada' ? 'badge-win' : (t.status === 'Perdida' ? 'badge-loss' : 'badge-be');
+                    let formattedPips = t.pips > 0 ? `+${t.pips}` : t.pips;
+
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-gray-800/40 transition">
+                            <td class="py-2 text-gray-500">${t.id}</td>
+                            <td class="py-2">${t.date}</td>
+                            <td class="py-2 font-semibold text-white">${t.asset}</td>
+                            <td class="py-2">${t.dir}</td>
+                            <td class="py-2 ${pipsClass}">${formattedPips} pips</td>
+                            <td class="py-2"><span class="px-2 py-0.5 text-xs rounded ${badgeClass}">${t.status}</span></td>
+                        </tr>
+                    `;
+                });
+            }
+
+            renderChart(sessionDates, sessionMap);
+        }
+
+        function renderChart(dates, map) {
+            const ctx = document.getElementById('sessionChart').getContext('2d');
+            const data = dates.map(d => map[d]);
+            const labels = dates.map(d => {
+                const parts = d.split('-');
+                return `${parts[2]}/${parts[1]}`;
+            });
+
+            if (sessionChart) sessionChart.destroy();
+
+            sessionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Pips por Sesión',
+                        data: data,
+                        backgroundColor: data.map(val => val >= 0 ? '#3fb950' : '#f85149'),
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+                        y: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } }
+                    }
+                }
+            });
+        }
+
+        renderDashboard();
+    </script>
+</body>
+</html>
