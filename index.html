@@ -68,7 +68,7 @@
         <select id="month-dropdown" class="month-select" onchange="setFilter(this.value)">
             <option value="ALL">🌐 GENERAL (TODO)</option>
             <option value="2026-09">🗓️ SEPTIEMBRE 2026 (28 Ago - 30 Sep)</option>
-            <option value="2026-10" selected>🗓️️ OCTUBRE 2026</option>
+            <option value="2026-10" selected>🗓️ OCTUBRE 2026</option>
         </select>
     </section>
 
@@ -78,11 +78,11 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="card p-4 text-center border-l-4 border-l-green-500">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Total Pips Netos</p>
-                <p class="text-2xl md:text-3xl font-bold accent-red mt-1" id="kpi-net-pips">-245</p>
+                <p class="text-2xl md:text-3xl font-bold accent-green mt-1" id="kpi-net-pips">+15</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Pips Positivos (+)</p>
-                <p class="text-2xl md:text-3xl font-bold accent-green mt-1" id="kpi-pos-pips">+500</p>
+                <p class="text-2xl md:text-3xl font-bold accent-green mt-1" id="kpi-pos-pips">+760</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Pips Negativos (-)</p>
@@ -90,19 +90,19 @@
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Win Rate (Efectividad)</p>
-                <p class="text-2xl md:text-3xl font-bold text-white mt-1" id="kpi-winrate">27.3%</p>
+                <p class="text-2xl md:text-3xl font-bold text-white mt-1" id="kpi-winrate">38.5%</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Profit Factor</p>
-                <p class="text-xl md:text-2xl font-bold text-white mt-1" id="kpi-pf">0.67</p>
+                <p class="text-xl md:text-2xl font-bold text-white mt-1" id="kpi-pf">1.02</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Trades Ejecutados</p>
-                <p class="text-xl md:text-2xl font-bold text-white mt-1" id="kpi-total-trades">11</p>
+                <p class="text-xl md:text-2xl font-bold text-white mt-1" id="kpi-total-trades">13</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Promedio Ganadora</p>
-                <p class="text-xl md:text-2xl font-bold accent-green mt-1" id="kpi-avg-win">+166.7 pips</p>
+                <p class="text-xl md:text-2xl font-bold accent-green mt-1" id="kpi-avg-win">+152.0 pips</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Promedio Perdedora</p>
@@ -120,26 +120,26 @@
             <div class="card p-5 border-t-2 border-t-yellow-500">
                 <div class="flex justify-between items-center mb-3">
                     <h3 class="text-lg font-bold text-white flex items-center gap-2">🥇 ORO (XAUUSD)</h3>
-                    <span class="text-xs px-2.5 py-1 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 rounded-full font-bold" id="oro-trades-count">9 Trades</span>
+                    <span class="text-xs px-2.5 py-1 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 rounded-full font-bold" id="oro-trades-count">11 Trades</span>
                 </div>
                 <div class="space-y-3">
                     <div>
                         <div class="flex justify-between text-xs text-gray-400 mb-1">
                             <span>Efectividad (Win Rate)</span>
-                            <span class="font-bold text-white" id="oro-wr-text">22.2% (2W / 6L / 1BE)</span>
+                            <span class="font-bold text-white" id="oro-wr-text">36.4% (4W / 6L / 1BE)</span>
                         </div>
                         <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
-                            <div class="bg-yellow-500 h-2.5 rounded-full" id="oro-wr-bar" style="width: 22.2%"></div>
+                            <div class="bg-yellow-500 h-2.5 rounded-full" id="oro-wr-bar" style="width: 36.4%"></div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-3 pt-2 text-sm border-t border-gray-800">
                         <div>
                             <span class="text-xs text-gray-400 block">Pips Netos</span>
-                            <span class="accent-red font-bold text-base" id="oro-net-pips">-250 pips</span>
+                            <span class="accent-green font-bold text-base" id="oro-net-pips">+10 pips</span>
                         </div>
                         <div>
                             <span class="text-xs text-gray-400 block">Ratio Acierto/Fallo</span>
-                            <span class="text-white font-bold text-base" id="oro-ratio">2 W - 6 L</span>
+                            <span class="text-white font-bold text-base" id="oro-ratio">4 W - 6 L</span>
                         </div>
                     </div>
                 </div>
@@ -186,8 +186,8 @@
                 <span class="accent-red font-bold" id="dir-buy-pips">-260 pips <span class="text-xs text-gray-400" id="dir-buy-wr">(40.0% WR)</span></span>
             </div>
             <div class="flex justify-between items-center pb-2 border-b border-gray-800">
-                <span class="font-medium text-gray-200" id="dir-sell-count">VENTAS (6 trades)</span>
-                <span class="accent-green font-bold" id="dir-sell-pips">+15 pips <span class="text-xs text-gray-400" id="dir-sell-wr">(16.7% WR)</span></span>
+                <span class="font-medium text-gray-200" id="dir-sell-count">VENTAS (8 trades)</span>
+                <span class="accent-green font-bold" id="dir-sell-pips">+275 pips <span class="text-xs text-gray-400" id="dir-sell-wr">(37.5% WR)</span></span>
             </div>
         </div>
     </section>
@@ -236,11 +236,11 @@
             </div>
             <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
                 <span class="text-gray-400 block text-xs">Expectativa por Operación</span>
-                <span class="text-white font-bold text-base" id="extra-expectancy">-22.3 pips</span>
+                <span class="text-white font-bold text-base" id="extra-expectancy">+1.2 pips</span>
             </div>
             <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
                 <span class="text-gray-400 block text-xs">Mejor Día</span>
-                <span class="accent-green font-bold text-base" id="extra-best-day">2026-10-02 (+135 pips)</span>
+                <span class="accent-green font-bold text-base" id="extra-best-day">2026-10-05 (+260 pips)</span>
             </div>
             <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
                 <span class="text-gray-400 block text-xs">Peor Día</span>
@@ -248,7 +248,7 @@
             </div>
             <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
                 <span class="text-gray-400 block text-xs">Efectividad de Días</span>
-                <span class="text-white font-bold text-base" id="extra-day-wr">50.0% Positivos (1/2)</span>
+                <span class="accent-green font-bold text-base" id="extra-day-wr">66.7% Positivos (2/3)</span>
             </div>
         </div>
     </section>
@@ -432,13 +432,15 @@
             {id: 149, date: "2026-10-01", asset: "ORO", dir: "VENTA", pips: -95, status: "Perdida"},
             {id: 150, date: "2026-10-01", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
             {id: 151, date: "2026-10-01", asset: "ORO", dir: "VENTA", pips: -95, status: "Perdida"},
-            // Sesión del Viernes 02-Oct-2026
             {id: 152, date: "2026-10-02", asset: "ORO", dir: "VENTA", pips: 300, status: "Ganada"},
             {id: 153, date: "2026-10-02", asset: "ORO", dir: "COMPRA", pips: 100, status: "Ganada"},
             {id: 154, date: "2026-10-02", asset: "NASDAQ", dir: "COMPRA", pips: 100, status: "Ganada"},
             {id: 155, date: "2026-10-02", asset: "ORO", dir: "COMPRA", pips: -125, status: "Perdida"},
             {id: 156, date: "2026-10-02", asset: "ORO", dir: "COMPRA", pips: -100, status: "Perdida"},
-            {id: 157, date: "2026-10-02", asset: "ORO", dir: "COMPRA", pips: -140, status: "Perdida"}
+            {id: 157, date: "2026-10-02", asset: "ORO", dir: "COMPRA", pips: -140, status: "Perdida"},
+            // Sesión del Lunes 05-Oct-2026
+            {id: 158, date: "2026-10-05", asset: "ORO", dir: "VENTA", pips: 160, status: "Ganada"},
+            {id: 159, date: "2026-10-05", asset: "ORO", dir: "VENTA", pips: 100, status: "Ganada"}
         ];
 
         let currentFilter = '2026-10';
