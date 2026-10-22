@@ -192,16 +192,16 @@
         </div>
     </section>
 
-    <!-- Gráfico / Histograma de Rendimiento por Sesión -->
+    <!-- Gráfico de Rendimiento por Sesión (Estilo Área/Línea Institucional) -->
     <section class="card p-5">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-base font-bold text-white flex items-center gap-2">
-                📊 Histograma de Rendimiento por Sesión (Pips)
+                📈 Rendimiento Operativas en Vivo (Pips por Sesión)
             </h2>
             <div class="flex items-center gap-3 text-xs">
-                <span class="flex items-center gap-1 text-gray-300"><span class="w-3 h-3 bg-[#3fb950] rounded-sm inline-block"></span> Positivo</span>
-                <span class="flex items-center gap-1 text-gray-300"><span class="w-3 h-3 bg-[#f85149] rounded-sm inline-block"></span> Negativo</span>
-                <span class="flex items-center gap-1 text-gray-300"><span class="w-3 h-3 bg-[#e3b341] rounded-sm inline-block"></span> Break Even (0 pips)</span>
+                <span class="flex items-center gap-1 text-gray-300"><span class="w-3 h-3 bg-[#3fb950] rounded-full inline-block"></span> Positivo</span>
+                <span class="flex items-center gap-1 text-gray-300"><span class="w-3 h-3 bg-[#f85149] rounded-full inline-block"></span> Negativo</span>
+                <span class="flex items-center gap-1 text-gray-300"><span class="w-3 h-3 bg-[#e3b341] rounded-full inline-block"></span> Break Even (0)</span>
             </div>
         </div>
         <div class="relative w-full h-72 md:h-80">
@@ -493,7 +493,6 @@
             {id: 203, date: "2026-10-21", asset: "ORO", dir: "COMPRA", pips: -50, status: "Perdida"},
             {id: 204, date: "2026-10-21", asset: "NASDAQ", dir: "COMPRA", pips: 250, status: "Ganada"},
             {id: 205, date: "2026-10-21", asset: "ORO", dir: "COMPRA", pips: 0, status: "Break Even"},
-            // Sesión del Jueves 22-Oct-2026
             {id: 206, date: "2026-10-22", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
             {id: 207, date: "2026-10-22", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"}
         ];
@@ -723,27 +722,37 @@
                 return `${parts[2]}/${parts[1]}`;
             });
 
-            // Asigna color verde si > 0, rojo si < 0 y amarillo si === 0 (BE)
-            const barColors = data.map(val => {
+            // Gradiente verde translúcido para el área bajo la línea
+            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, 'rgba(63, 185, 80, 0.4)');
+            gradient.addColorStop(1, 'rgba(63, 185, 80, 0.0)');
+
+            // Colores personalizados para cada punto (Verde >0, Rojo <0, Amarillo =0 BE)
+            const pointColors = data.map(val => {
                 if (val > 0) return '#3fb950';
                 if (val < 0) return '#f85149';
-                return '#e3b341'; // Amarillo para días con 0 pips (BE)
+                return '#e3b341';
             });
-
-            // Para que las barras con 0 pips sean visibles como líneas amarillas
-            const displayData = data.map(val => val === 0 ? 5 : val);
 
             if (sessionChart) sessionChart.destroy();
 
             sessionChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
                         label: 'Pips por Sesión',
-                        data: displayData,
-                        backgroundColor: barColors,
-                        borderRadius: 4
+                        data: data,
+                        borderColor: '#3fb950',
+                        borderWidth: 2,
+                        backgroundColor: gradient,
+                        fill: true,
+                        tension: 0.35,
+                        pointBackgroundColor: pointColors,
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 1,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
                     }]
                 },
                 options: {
@@ -754,15 +763,21 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    const originalValue = data[context.dataIndex];
-                                    return originalValue === 0 ? 'Resultado: 0 pips (Break Even)' : `Resultado: ${originalValue > 0 ? '+' : ''}${originalValue} pips`;
+                                    const val = context.raw;
+                                    return val === 0 ? 'Resultado: 0 pips (Break Even)' : `Resultado: ${val > 0 ? '+' : ''}${val} pips`;
                                 }
                             }
                         }
                     },
                     scales: {
-                        x: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
-                        y: { ticks: { color: '#8b949e' }, grid: { color: '#21262d' } }
+                        x: { 
+                            ticks: { color: '#8b949e', font: { size: 11 } }, 
+                            grid: { color: '#21262d' } 
+                        },
+                        y: { 
+                            ticks: { color: '#8b949e', font: { size: 11 } }, 
+                            grid: { color: '#21262d' } 
+                        }
                     }
                 }
             });
