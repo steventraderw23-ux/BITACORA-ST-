@@ -56,7 +56,7 @@
             <span class="px-3 py-1 bg-green-950 border border-green-600 text-green-400 text-xs font-bold rounded-full flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> ESTADO: RENTABLE
             </span>
-            <span class="text-xs text-gray-400 border border-gray-700 px-3 py-1 rounded-full" id="period-badge">Octubre 2026</span>
+            <span class="text-xs text-gray-400 border border-gray-700 px-3 py-1 rounded-full" id="period-badge">Noviembre 2026</span>
         </div>
     </header>
 
@@ -67,8 +67,9 @@
         </label>
         <select id="month-dropdown" class="month-select" onchange="setFilter(this.value)">
             <option value="ALL">🌐 GENERAL (TODO)</option>
+            <option value="2026-11" selected>🗓️ NOVIEMBRE 2026 (EN CURSO)</option>
+            <option value="2026-10">🗓️ OCTUBRE 2026</option>
             <option value="2026-09">🗓️ SEPTIEMBRE 2026 (28 Ago - 30 Sep)</option>
-            <option value="2026-10" selected>🗓️ OCTUBRE 2026</option>
         </select>
     </section>
 
@@ -78,35 +79,35 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="card p-4 text-center border-l-4 border-l-green-500">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Total Pips Netos</p>
-                <p class="text-2xl md:text-3xl font-bold accent-green mt-1" id="kpi-net-pips">+1,840</p>
+                <p class="text-2xl md:text-3xl font-bold accent-green mt-1" id="kpi-net-pips">+615</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Pips Positivos (+)</p>
-                <p class="text-2xl md:text-3xl font-bold accent-green mt-1" id="kpi-pos-pips">+4,900</p>
+                <p class="text-2xl md:text-3xl font-bold accent-green mt-1" id="kpi-pos-pips">+1,080</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Pips Negativos (-)</p>
-                <p class="text-2xl md:text-3xl font-bold accent-red mt-1" id="kpi-neg-pips">-3,060</p>
+                <p class="text-2xl md:text-3xl font-bold accent-red mt-1" id="kpi-neg-pips">-465</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Win Rate (Efectividad)</p>
-                <p class="text-2xl md:text-3xl font-bold text-white mt-1" id="kpi-winrate">44.7%</p>
+                <p class="text-2xl md:text-3xl font-bold text-white mt-1" id="kpi-winrate">63.6%</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Profit Factor</p>
-                <p class="text-xl md:text-2xl font-bold text-white mt-1" id="kpi-pf">1.60</p>
+                <p class="text-xl md:text-2xl font-bold text-white mt-1" id="kpi-pf">2.32</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Trades Ejecutados</p>
-                <p class="text-xl md:text-2xl font-bold text-white mt-1" id="kpi-total-trades">76</p>
+                <p class="text-xl md:text-2xl font-bold text-white mt-1" id="kpi-total-trades">11</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Promedio Ganadora</p>
-                <p class="text-xl md:text-2xl font-bold accent-green mt-1" id="kpi-avg-win">+144.1 pips</p>
+                <p class="text-xl md:text-2xl font-bold accent-green mt-1" id="kpi-avg-win">+154.3 pips</p>
             </div>
             <div class="card p-4 text-center">
                 <p class="text-xs text-gray-400 uppercase font-semibold">Promedio Perdedora</p>
-                <p class="text-xl md:text-2xl font-bold accent-red mt-1" id="kpi-avg-loss">-80.5 pips</p>
+                <p class="text-xl md:text-2xl font-bold accent-red mt-1" id="kpi-avg-loss">-155.0 pips</p>
             </div>
         </div>
     </section>
@@ -120,26 +121,26 @@
             <div class="card p-5 border-t-2 border-t-yellow-500">
                 <div class="flex justify-between items-center mb-3">
                     <h3 class="text-lg font-bold text-white flex items-center gap-2">🥇 ORO (XAUUSD)</h3>
-                    <span class="text-xs px-2.5 py-1 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 rounded-full font-bold" id="oro-trades-count">43 Trades</span>
+                    <span class="text-xs px-2.5 py-1 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 rounded-full font-bold" id="oro-trades-count">4 Trades</span>
                 </div>
                 <div class="space-y-3">
                     <div>
                         <div class="flex justify-between text-xs text-gray-400 mb-1">
                             <span>Efectividad (Win Rate)</span>
-                            <span class="font-bold text-white" id="oro-wr-text">39.5% (17W / 22L / 4BE)</span>
+                            <span class="font-bold text-white" id="oro-wr-text">50.0% (2W / 1L / 1BE)</span>
                         </div>
                         <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
-                            <div class="bg-yellow-500 h-2.5 rounded-full" id="oro-wr-bar" style="width: 39.5%"></div>
+                            <div class="bg-yellow-500 h-2.5 rounded-full" id="oro-wr-bar" style="width: 50.0%"></div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-3 pt-2 text-sm border-t border-gray-800">
                         <div>
                             <span class="text-xs text-gray-400 block">Pips Netos</span>
-                            <span class="accent-green font-bold text-base" id="oro-net-pips">+420 pips</span>
+                            <span class="accent-green font-bold text-base" id="oro-net-pips">+30 pips</span>
                         </div>
                         <div>
                             <span class="text-xs text-gray-400 block">Ratio Acierto/Fallo</span>
-                            <span class="text-white font-bold text-base" id="oro-ratio">17 W - 22 L</span>
+                            <span class="text-white font-bold text-base" id="oro-ratio">2 W - 1 L</span>
                         </div>
                     </div>
                 </div>
@@ -149,26 +150,26 @@
             <div class="card p-5 border-t-2 border-t-blue-500">
                 <div class="flex justify-between items-center mb-3">
                     <h3 class="text-lg font-bold text-white flex items-center gap-2">📈 NASDAQ 100</h3>
-                    <span class="text-xs px-2.5 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/30 rounded-full font-bold" id="nas-trades-count">33 Trades</span>
+                    <span class="text-xs px-2.5 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/30 rounded-full font-bold" id="nas-trades-count">7 Trades</span>
                 </div>
                 <div class="space-y-3">
                     <div>
                         <div class="flex justify-between text-xs text-gray-400 mb-1">
                             <span>Efectividad (Win Rate)</span>
-                            <span class="font-bold text-white" id="nas-wr-text">54.5% (18W / 10L / 5BE)</span>
+                            <span class="font-bold text-white" id="nas-wr-text">71.4% (5W / 2L / 0BE)</span>
                         </div>
                         <div class="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden">
-                            <div class="bg-blue-500 h-2.5 rounded-full" id="nas-wr-bar" style="width: 54.5%"></div>
+                            <div class="bg-blue-500 h-2.5 rounded-full" id="nas-wr-bar" style="width: 71.4%"></div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-3 pt-2 text-sm border-t border-gray-800">
                         <div>
                             <span class="text-xs text-gray-400 block">Pips Netos</span>
-                            <span class="accent-green font-bold text-base" id="nas-net-pips">+1,420 pips</span>
+                            <span class="accent-green font-bold text-base" id="nas-net-pips">+585 pips</span>
                         </div>
                         <div>
                             <span class="text-xs text-gray-400 block">Ratio Acierto/Fallo</span>
-                            <span class="text-white font-bold text-base" id="nas-ratio">18 W - 10 L</span>
+                            <span class="text-white font-bold text-base" id="nas-ratio">5 W - 2 L</span>
                         </div>
                     </div>
                 </div>
@@ -182,12 +183,12 @@
         <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2">🧭 Desglose por Dirección</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div class="flex justify-between items-center pb-2 border-b border-gray-800">
-                <span class="font-medium text-gray-200" id="dir-buy-count">COMPRAS (39 trades)</span>
-                <span class="accent-green font-bold" id="dir-buy-pips">+1,080 pips <span class="text-xs text-gray-400" id="dir-buy-wr">(41.0% WR)</span></span>
+                <span class="font-medium text-gray-200" id="dir-buy-count">COMPRAS (7 trades)</span>
+                <span class="accent-green font-bold" id="dir-buy-pips">+265 pips <span class="text-xs text-gray-400" id="dir-buy-wr">(57.1% WR)</span></span>
             </div>
             <div class="flex justify-between items-center pb-2 border-b border-gray-800">
-                <span class="font-medium text-gray-200" id="dir-sell-count">VENTAS (37 trades)</span>
-                <span class="accent-green font-bold" id="dir-sell-pips">+760 pips <span class="text-xs text-gray-400" id="dir-sell-wr">(48.6% WR)</span></span>
+                <span class="font-medium text-gray-200" id="dir-sell-count">VENTAS (4 trades)</span>
+                <span class="accent-green font-bold" id="dir-sell-pips">+350 pips <span class="text-xs text-gray-400" id="dir-sell-wr">(75.0% WR)</span></span>
             </div>
         </div>
     </section>
@@ -199,7 +200,7 @@
                 📈 RENDIMIENTO ACUMULADO (CURVA EN VIVO)
             </h2>
             <div class="flex items-center gap-3 text-xs">
-                <span class="px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/30 rounded font-bold" id="chart-total-label">Total Acumulado: +1,840 pips</span>
+                <span class="px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/30 rounded font-bold" id="chart-total-label">Total Acumulado: +615 pips</span>
             </div>
         </div>
         <div class="relative w-full h-80 md:h-96">
@@ -237,23 +238,23 @@
             </div>
             <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
                 <span class="text-gray-400 block text-xs">Peor Operación</span>
-                <span class="accent-red font-bold text-base" id="extra-worst-trade">-150 pips</span>
+                <span class="accent-red font-bold text-base" id="extra-worst-trade">-165 pips</span>
             </div>
             <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
                 <span class="text-gray-400 block text-xs">Expectativa por Operación</span>
-                <span class="text-white font-bold text-base" id="extra-expectancy">+24.2 pips</span>
+                <span class="text-white font-bold text-base" id="extra-expectancy">+55.9 pips</span>
             </div>
             <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
                 <span class="text-gray-400 block text-xs">Mejor Día</span>
-                <span class="accent-green font-bold text-base" id="extra-best-day">2026-10-06 (+480 pips)</span>
+                <span class="accent-green font-bold text-base" id="extra-best-day">2026-11-02 (+450 pips)</span>
             </div>
             <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
                 <span class="text-gray-400 block text-xs">Peor Día</span>
-                <span class="accent-red font-bold text-base" id="extra-worst-day">2026-10-01 (-380 pips)</span>
+                <span class="accent-red font-bold text-base" id="extra-worst-day">2026-11-03 (-120 pips)</span>
             </div>
             <div class="p-3 bg-gray-900/50 rounded border border-gray-800">
                 <span class="text-gray-400 block text-xs">Efectividad de Días</span>
-                <span class="accent-green font-bold text-base" id="extra-day-wr">75.0% Positivos (15/20)</span>
+                <span class="accent-green font-bold text-base" id="extra-day-wr">66.7% Positivos (2/3)</span>
             </div>
         </div>
     </section>
@@ -285,6 +286,7 @@
 
     <script>
         const trades = [
+            // Agosto - Septiembre 2026
             {id: 1, date: "2026-08-28", asset: "ORO", dir: "COMPRA", pips: 110, status: "Ganada"},
             {id: 2, date: "2026-08-28", asset: "NASDAQ", dir: "VENTA", pips: 150, status: "Ganada"},
             {id: 3, date: "2026-08-28", asset: "ORO", dir: "VENTA", pips: 120, status: "Ganada"},
@@ -431,6 +433,7 @@
             {id: 144, date: "2026-09-30", asset: "ORO", dir: "COMPRA", pips: -80, status: "Perdida"},
             {id: 145, date: "2026-09-30", asset: "ORO", dir: "COMPRA", pips: -80, status: "Perdida"},
             {id: 146, date: "2026-09-30", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"},
+            
             // Octubre 2026
             {id: 147, date: "2026-10-01", asset: "NASDAQ", dir: "COMPRA", pips: -95, status: "Perdida"},
             {id: 148, date: "2026-10-01", asset: "ORO", dir: "VENTA", pips: -95, status: "Perdida"},
@@ -512,10 +515,23 @@
             {id: 224, date: "2026-10-30", asset: "ORO", dir: "VENTA", pips: 150, status: "Ganada"},
             {id: 225, date: "2026-10-30", asset: "NASDAQ", dir: "COMPRA", pips: -75, status: "Perdida"},
             {id: 226, date: "2026-10-30", asset: "NASDAQ", dir: "VENTA", pips: 100, status: "Ganada"},
-            {id: 227, date: "2026-10-30", asset: "NASDAQ", dir: "VENTA", pips: 120, status: "Ganada"}
+            {id: 227, date: "2026-10-30", asset: "NASDAQ", dir: "VENTA", pips: 120, status: "Ganada"},
+
+            // Noviembre 2026 (En Curso)
+            {id: 228, date: "2026-11-02", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 229, date: "2026-11-02", asset: "NASDAQ", dir: "COMPRA", pips: 100, status: "Ganada"},
+            {id: 230, date: "2026-11-02", asset: "NASDAQ", dir: "VENTA", pips: 200, status: "Ganada"},
+            {id: 231, date: "2026-11-03", asset: "ORO", dir: "COMPRA", pips: -150, status: "Perdida"},
+            {id: 232, date: "2026-11-03", asset: "ORO", dir: "COMPRA", pips: 30, status: "Ganada"},
+            {id: 233, date: "2026-11-04", asset: "NASDAQ", dir: "VENTA", pips: -150, status: "Perdida"},
+            {id: 234, date: "2026-11-04", asset: "NASDAQ", dir: "VENTA", pips: 300, status: "Ganada"},
+            {id: 235, date: "2026-11-04", asset: "ORO", dir: "VENTA", pips: 0, status: "Break Even"},
+            {id: 236, date: "2026-11-04", asset: "NASDAQ", dir: "COMPRA", pips: 150, status: "Ganada"},
+            {id: 237, date: "2026-11-04", asset: "NASDAQ", dir: "COMPRA", pips: -165, status: "Perdida"},
+            {id: 238, date: "2026-11-04", asset: "NASDAQ", dir: "COMPRA", pips: 150, status: "Ganada"}
         ];
 
-        let currentFilter = '2026-10';
+        let currentFilter = '2026-11';
         let sessionChart = null;
 
         function setFilter(filter) {
@@ -530,6 +546,9 @@
             }
             if (currentFilter === '2026-10') {
                 return trades.filter(t => t.date.startsWith('2026-10'));
+            }
+            if (currentFilter === '2026-11') {
+                return trades.filter(t => t.date.startsWith('2026-11'));
             }
             return trades.filter(t => t.date.startsWith(currentFilter));
         }
@@ -638,6 +657,7 @@
             if (currentFilter === 'ALL') badge.innerText = 'Histórico Completo';
             else if (currentFilter === '2026-09') badge.innerText = '28 Ago - 30 Sep 2026';
             else if (currentFilter === '2026-10') badge.innerText = 'Octubre 2026';
+            else if (currentFilter === '2026-11') badge.innerText = 'Noviembre 2026';
 
             const sessionDates = Object.keys(sessionMap).sort();
             let posDays = 0, negDays = 0;
@@ -770,7 +790,7 @@
                         borderWidth: 2.5,
                         backgroundColor: gradient,
                         fill: true,
-                        tension: 0.4, // Curva suave idéntica al diseño de referencia
+                        tension: 0.4,
                         pointBackgroundColor: pointColors,
                         pointBorderColor: '#ffffff',
                         pointBorderWidth: 1.5,
