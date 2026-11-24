@@ -287,18 +287,14 @@ const trades = [
     {id: 281, date: "2026-11-17", asset: "ORO", dir: "VENTA", pips: -150, status: "Perdida"},
     {id: 282, date: "2026-11-17", asset: "ORO", dir: "VENTA", pips: 220, status: "Ganada"},
     {id: 283, date: "2026-11-18", asset: "ORO", dir: "COMPRA", pips: 150, status: "Ganada"},
-    {id: 284, date: "2026-11-18", asset: "NASDAQ", dir: "VENTA", pips: 250, status: "Ganada"}
-    // Jueves 19 Noviembre 2026
+    {id: 284, date: "2026-11-18", asset: "NASDAQ", dir: "VENTA", pips: 250, status: "Ganada"},
     {id: 285, date: "2026-11-19", asset: "ORO", dir: "VENTA", pips: 160, status: "Ganada"},
     {id: 286, date: "2026-11-19", asset: "NASDAQ", dir: "VENTA", pips: 300, status: "Ganada"},
-    // Viernes 20 Noviembre 2026
     {id: 287, date: "2026-11-20", asset: "ORO", dir: "VENTA", pips: -160, status: "Perdida"},
     {id: 288, date: "2026-11-20", asset: "ORO", dir: "VENTA", pips: -130, status: "Perdida"},
-    // Lunes 23 Noviembre 2026
     {id: 289, date: "2026-11-23", asset: "ORO", dir: "VENTA", pips: 100, status: "Ganada"},
     {id: 290, date: "2026-11-23", asset: "NASDAQ", dir: "COMPRA", pips: 250, status: "Ganada"},
     {id: 291, date: "2026-11-23", asset: "ORO", dir: "COMPRA", pips: -140, status: "Perdida"},
-    // Martes 24 Noviembre 2026
     {id: 292, date: "2026-11-24", asset: "ORO", dir: "COMPRA", pips: 190, status: "Ganada"},
     {id: 293, date: "2026-11-24", asset: "NASDAQ", dir: "VENTA", pips: 260, status: "Ganada"},
 ];
