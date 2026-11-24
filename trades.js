@@ -300,5 +300,5 @@ const trades = [
     {id: 291, date: "2026-11-23", asset: "ORO", dir: "COMPRA", pips: -140, status: "Perdida"},
     // Martes 24 Noviembre 2026
     {id: 292, date: "2026-11-24", asset: "ORO", dir: "COMPRA", pips: 190, status: "Ganada"},
-    {id: 293, date: "2026-11-24", asset: "NASDAQ", dir: "VENTA", pips: 260, status: "Ganada"}
+    {id: 293, date: "2026-11-24", asset: "NASDAQ", dir: "VENTA", pips: 260, status: "Ganada"},
 ];
